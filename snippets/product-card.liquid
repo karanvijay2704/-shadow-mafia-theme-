@@ -1,10 +1,52 @@
+{% doc %}
+Renders a Shadow Mafia product card.
+@param {product} product - Product to render.
+{% enddoc %}
+
 <article class="product-card">
-  <a href="{{ product.url }}">
+  <a class="product-card__media-link" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
     <div class="product-media">
-      {% if product.featured_media %}{{ product.featured_media | image_url: width: 900 | image_tag: loading: 'lazy' }}{% endif %}
+      {% if product.featured_media %}
+        {{ product.featured_media | image_url: width: 900 | image_tag: loading: 'lazy', widths: '240,360,540,720,900', sizes: '(min-width: 981px) 25vw, 50vw', class: 'product-card__image product-card__image--primary' }}
+        {% if product.images.size > 1 %}
+          {{ product.images[1] | image_url: width: 900 | image_tag: loading: 'lazy', widths: '240,360,540,720,900', sizes: '(min-width: 981px) 25vw, 50vw', class: 'product-card__image product-card__image--secondary' }}
+        {% endif %}
+      {% else %}
+        <div class="product-card__placeholder"></div>
+      {% endif %}
+
       {% if product.compare_at_price > product.price %}<span class="sale-badge">SALE</span>{% endif %}
+      {% unless product.available %}<span class="sold-badge">SOLD OUT</span>{% endunless %}
     </div>
-    <h3>{{ product.title }}</h3>
-    <p>{{ product.price | money }}{% if product.compare_at_price > product.price %} <s>{{ product.compare_at_price | money }}</s>{% endif %}</p>
   </a>
+
+  <div class="product-card__info">
+    <a href="{{ product.url }}"><h3>{{ product.title }}</h3></a>
+    <p>
+      {{ product.price | money }}
+      {% if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s>{% endif %}
+    </p>
+
+    {% if product.selected_or_first_available_variant.unit_price_measurement %}
+      <small class="unit-price">
+        {{ product.selected_or_first_available_variant.unit_price | money }} /
+        {% if product.selected_or_first_available_variant.unit_price_measurement.reference_value != 1 %}{{ product.selected_or_first_available_variant.unit_price_measurement.reference_value }}{% endif %}
+        {{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}
+      </small>
+    {% endif %}
+
+    {% if product.available %}
+      {% if product.has_only_default_variant %}
+        {% form 'product', product, class: 'card-quick-form' %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <button class="card-action" type="submit">QUICK ADD +</button>
+        {% endform %}
+      {% else %}
+        <a class="card-action" href="{{ product.url }}">CHOOSE OPTIONS →</a>
+      {% endif %}
+    {% else %}
+      <span class="card-action card-action--disabled">SOLD OUT</span>
+    {% endif %}
+  </div>
 </article>
