@@ -1,0 +1,10 @@
+<article class="product-card">
+  <a href="{{ product.url }}">
+    <div class="product-media">
+      {% if product.featured_media %}{{ product.featured_media | image_url: width: 900 | image_tag: loading: 'lazy' }}{% endif %}
+      {% if product.compare_at_price > product.price %}<span class="sale-badge">SALE</span>{% endif %}
+    </div>
+    <h3>{{ product.title }}</h3>
+    <p>{{ product.price | money }}{% if product.compare_at_price > product.price %} <s>{{ product.compare_at_price | money }}</s>{% endif %}</p>
+  </a>
+</article>
