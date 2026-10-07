@@ -1,0 +1,1 @@
+document.querySelectorAll('[data-menu-toggle]').forEach(b=>b.addEventListener('click',()=>document.querySelector('[data-mobile-menu]')?.classList.toggle('is-open')));if(!matchMedia('(prefers-reduced-motion: reduce)').matches)requestAnimationFrame(()=>document.body.classList.add('is-ready'));
