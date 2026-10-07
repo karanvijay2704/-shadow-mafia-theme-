@@ -1,5 +1,6 @@
 <header class="site-header">
   <button class="icon-btn mobile-only" data-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="MobileMenu">☰</button>
+
   <a class="brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
     {% if settings.logo != blank %}
       {{ settings.logo | image_url: width: 240 | image_tag: class: 'brand-logo', loading: 'eager' }}
@@ -9,29 +10,49 @@
   </a>
 
   <nav class="desktop-nav" aria-label="Primary">
-    <a href="/collections/new-arrivals">NEW DROP</a>
-    <a href="/collections/oversized-t-shirts">OVERSIZED T-SHIRTS</a>
-    <a href="/collections/jackets-hoodies">JACKETS & HOODIES</a>
-    <a href="/collections/shoes">SHOES</a>
-    <a href="/collections/accessories">ACCESSORIES</a>
+    {% if section.settings.menu != blank %}
+      {% for link in section.settings.menu.links %}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {% endfor %}
+    {% else %}
+      <a href="/collections/new-arrivals">NEW DROP</a>
+      <a href="/collections/oversized-t-shirts">OVERSIZED T-SHIRTS</a>
+      <a href="/collections/jackets-hoodies">JACKETS & HOODIES</a>
+      <a href="/collections/shoes">SHOES</a>
+      <a href="/collections/accessories">ACCESSORIES</a>
+    {% endif %}
   </nav>
 
   <div class="header-actions">
     <a href="{{ routes.search_url }}" aria-label="Search">SEARCH</a>
     <a href="{{ routes.account_url }}" aria-label="Account">ACCOUNT</a>
-    <a href="{{ routes.cart_url }}" aria-label="Cart">BAG <span id="CartCount">{{ cart.item_count }}</span></a>
+    <a href="{{ routes.cart_url }}" aria-label="Cart" data-cart-trigger>BAG <span id="CartCount">{{ cart.item_count }}</span></a>
   </div>
 
   <nav class="mobile-menu" id="MobileMenu" data-mobile-menu aria-label="Mobile" aria-hidden="true">
     <button class="mobile-close" data-menu-toggle aria-label="Close menu" aria-expanded="false">×</button>
-    <a href="/collections/new-arrivals">NEW DROP</a>
-    <a href="/collections/oversized-t-shirts">OVERSIZED T-SHIRTS</a>
-    <a href="/collections/shirts">SHIRTS</a>
-    <a href="/collections/jackets-hoodies">JACKETS & HOODIES</a>
-    <a href="/collections/shoes">SHOES</a>
-    <a href="/collections/corset">CORSETS</a>
-    <a href="/collections/accessories">ACCESSORIES</a>
-    <a href="/collections/women">WOMEN</a>
+    {% if section.settings.menu != blank %}
+      {% for link in section.settings.menu.links %}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {% endfor %}
+    {% else %}
+      <a href="/collections/new-arrivals">NEW DROP</a>
+      <a href="/collections/oversized-t-shirts">OVERSIZED T-SHIRTS</a>
+      <a href="/collections/shirts">SHIRTS</a>
+      <a href="/collections/jackets-hoodies">JACKETS & HOODIES</a>
+      <a href="/collections/shoes">SHOES</a>
+      <a href="/collections/corset">CORSETS</a>
+      <a href="/collections/accessories">ACCESSORIES</a>
+      <a href="/collections/women">WOMEN</a>
+    {% endif %}
   </nav>
 </header>
-{% schema %}{"name":"Header","settings":[]}{% endschema %}
+
+{% schema %}
+{
+  "name":"Header",
+  "settings":[
+    {"type":"link_list","id":"menu","label":"Main menu"}
+  ]
+}
+{% endschema %}
