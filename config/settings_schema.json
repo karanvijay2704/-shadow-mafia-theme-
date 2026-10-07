@@ -2,7 +2,7 @@
   {
     "name":"theme_info",
     "theme_name":"Shadow Mafia",
-    "theme_version":"1.2.0",
+    "theme_version":"1.3.0",
     "theme_author":"Shadow Mafia",
     "theme_documentation_url":"https://shopify.dev/docs/storefronts/themes",
     "theme_support_url":"https://shadowmafiastore.com/pages/contact"
@@ -12,6 +12,13 @@
     "settings":[
       {"type":"image_picker","id":"logo","label":"Logo"},
       {"type":"image_picker","id":"favicon","label":"Favicon"}
+    ]
+  },
+  {
+    "name":"Typography",
+    "settings":[
+      {"type":"font_picker","id":"heading_font","label":"Heading font","default":"bebas_neue_n4"},
+      {"type":"font_picker","id":"body_font","label":"Body font","default":"barlow_n4"}
     ]
   },
   {
