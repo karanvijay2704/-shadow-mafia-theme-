@@ -1,0 +1,32 @@
+<header class="site-header">
+  <button class="icon-btn mobile-only" data-menu-toggle aria-label="Open menu">☰</button>
+  <a class="brand" href="{{ routes.root_url }}">
+    {% if settings.logo != blank %}
+      {{ settings.logo | image_url: width: 220 | image_tag: class: 'brand-logo', loading: 'eager' }}
+    {% else %}
+      <span class="brand-mark">SM</span><span class="brand-name">SHADOW MAFIA</span>
+    {% endif %}
+  </a>
+  <nav class="desktop-nav" aria-label="Primary">
+    <a href="/collections/new-arrivals">NEW DROP</a>
+    <a href="/collections/oversized-t-shirts">OVERSIZED T-SHIRTS</a>
+    <a href="/collections/jackets-hoodies">JACKETS & HOODIES</a>
+    <a href="/collections/shoes">SHOES</a>
+    <a href="/collections/accessories">ACCESSORIES</a>
+  </nav>
+  <div class="header-actions">
+    <a href="{{ routes.search_url }}" aria-label="Search">⌕</a>
+    <a href="{{ routes.account_url }}" aria-label="Account">◌</a>
+    <a href="{{ routes.cart_url }}" aria-label="Cart">Bag <span id="CartCount">{{ cart.item_count }}</span></a>
+  </div>
+  <div class="mobile-menu" data-mobile-menu>
+    <button class="mobile-close" data-menu-toggle aria-label="Close menu">×</button>
+    <a href="/collections/new-arrivals">NEW DROP</a>
+    <a href="/collections/oversized-t-shirts">OVERSIZED T-SHIRTS</a>
+    <a href="/collections/jackets-hoodies">JACKETS & HOODIES</a>
+    <a href="/collections/shoes">SHOES</a>
+    <a href="/collections/corset">CORSETS</a>
+    <a href="/collections/accessories">ACCESSORIES</a>
+  </div>
+</header>
+{% schema %}{"name":"Header","settings":[]}{% endschema %}
