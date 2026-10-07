@@ -1,0 +1,23 @@
+<article class="article-page">
+  {% if article.image %}
+    <div class="article-hero">
+      {{ article.image | image_url: width: 2200 | image_tag: loading: 'eager', widths: '720,1200,1800,2200' }}
+      <div class="article-hero__overlay"></div>
+      <div class="article-hero__copy">
+        <p class="eyebrow">{{ article.published_at | date: '%d.%m.%Y' }}</p>
+        <h1>{{ article.title }}</h1>
+      </div>
+    </div>
+  {% else %}
+    <header class="section-shell article-header">
+      <p class="eyebrow">{{ article.published_at | date: '%d.%m.%Y' }}</p>
+      <h1>{{ article.title }}</h1>
+    </header>
+  {% endif %}
+
+  <div class="section-shell article-body rte">
+    {{ article.content }}
+    <div class="article-back"><a class="btn-secondary" href="{{ blog.url }}">BACK TO JOURNAL →</a></div>
+  </div>
+</article>
+{% schema %}{"name":"Main article","settings":[]}{% endschema %}
