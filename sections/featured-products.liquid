@@ -1,0 +1,14 @@
+<section class="section-shell">
+  <div class="section-head"><p class="eyebrow">CURATED FOR THE NIGHT</p><h2>FEATURED PIECES</h2></div>
+  {% assign collection = collections[section.settings.collection] %}
+  <div class="product-grid">
+    {% for product in collection.products limit: 8 %}
+      {% render 'product-card', product: product %}
+    {% else %}
+      {% for i in (1..4) %}<div class="product-card placeholder-card"><div class="product-media"></div><h3>SHADOW PIECE {{ i }}</h3><p>₹0.00</p></div>{% endfor %}
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+{"name":"Featured products","settings":[{"type":"collection","id":"collection","label":"Collection"}]}
+{% endschema %}
