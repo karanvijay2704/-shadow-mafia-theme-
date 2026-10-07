@@ -1,0 +1,5 @@
+<section class="split-banner section-shell">
+  <div class="split-copy"><p class="eyebrow">FOR HER</p><h2>DARK FEMININITY</h2><p>Sharp silhouettes. Controlled chaos. Pieces that own the room before you say a word.</p><a class="btn-secondary" href="/collections/women">SHOP WOMEN →</a></div>
+  <div class="split-media">{% if section.settings.image %}{{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy' }}{% endif %}</div>
+</section>
+{% schema %}{"name":"Women spotlight","settings":[{"type":"image_picker","id":"image","label":"Image"}]}{% endschema %}
