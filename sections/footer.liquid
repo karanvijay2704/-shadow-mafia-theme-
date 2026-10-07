@@ -2,14 +2,21 @@
   <div>
     <div class="footer-brand">SHADOW MAFIA</div>
     <p>WALK DIFFERENT.</p>
+    <div class="footer-socials">
+      {% if settings.instagram_url != blank %}<a href="{{ settings.instagram_url }}" target="_blank" rel="noopener">Instagram ↗</a>{% endif %}
+      {% if settings.facebook_url != blank %}<a href="{{ settings.facebook_url }}" target="_blank" rel="noopener">Facebook ↗</a>{% endif %}
+    </div>
   </div>
+
   <div>
     <h3>SHOP</h3>
     <a href="/collections/new-arrivals">New Drop</a>
     <a href="/collections/oversized-t-shirts">Oversized T-Shirts</a>
     <a href="/collections/jackets-hoodies">Jackets & Hoodies</a>
     <a href="/collections/shoes">Shoes</a>
+    <a href="/collections/accessories">Accessories</a>
   </div>
+
   <div>
     <h3>INFO</h3>
     <a href="/pages/about-us">About</a>
@@ -19,13 +26,21 @@
     <a href="/policies/shipping-policy">Shipping</a>
     <a href="/policies/refund-policy">Refund</a>
   </div>
+
   <div>
     <h3>JOIN THE MAFIA</h3>
+    <p class="footer-copy">Private drops, launches and campaign alerts.</p>
     {% form 'customer' %}
       <input type="hidden" name="contact[tags]" value="newsletter">
-      <input class="search-input" type="email" name="contact[email]" placeholder="Your email" required>
+      <input class="search-input" type="email" name="contact[email]" placeholder="Your email" autocomplete="email" required>
       <button class="btn-secondary" type="submit">JOIN →</button>
+      {% if form.posted_successfully? %}<p class="form-success">You’re in.</p>{% endif %}
+      {{ form.errors | default_errors }}
     {% endform %}
   </div>
 </footer>
+<div class="footer-bottom">
+  <span>© {{ 'now' | date: '%Y' }} SHADOW MAFIA</span>
+  <span>WALK DIFFERENT</span>
+</div>
 {% schema %}{"name":"Footer","settings":[]}{% endschema %}
