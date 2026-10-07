@@ -1,0 +1,36 @@
+<section class="section-shell contact-page">
+  <div class="section-head">
+    <p class="eyebrow">CONTACT</p>
+    <h1>{{ page.title | default: 'TALK TO THE MAFIA' }}</h1>
+  </div>
+
+  <div class="contact-layout">
+    <div class="rte">
+      {% if page.content != blank %}
+        {{ page.content }}
+      {% else %}
+        <p>Questions about an order, sizing or a drop? Send us a message and the Shadow Mafia team will get back to you.</p>
+      {% endif %}
+    </div>
+
+    {% form 'contact', class: 'contact-form' %}
+      {% if form.posted_successfully? %}<p class="form-success">Message received. We’ll get back to you soon.</p>{% endif %}
+      {{ form.errors | default_errors }}
+
+      <label for="ContactName">NAME</label>
+      <input id="ContactName" type="text" name="contact[name]" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}" autocomplete="name">
+
+      <label for="ContactEmail">EMAIL</label>
+      <input id="ContactEmail" type="email" name="contact[email]" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" autocomplete="email" required>
+
+      <label for="ContactPhone">PHONE</label>
+      <input id="ContactPhone" type="tel" name="contact[phone]" value="{{ form.phone }}" autocomplete="tel">
+
+      <label for="ContactMessage">MESSAGE</label>
+      <textarea id="ContactMessage" name="contact[body]" rows="7" required>{{ form.body }}</textarea>
+
+      <button class="btn-primary" type="submit">SEND MESSAGE →</button>
+    {% endform %}
+  </div>
+</section>
+{% schema %}{"name":"Contact form","settings":[]}{% endschema %}
