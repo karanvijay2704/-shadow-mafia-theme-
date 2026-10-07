@@ -16,9 +16,8 @@
   </head>
   <body class="template-{{ template.name | handle }}">
     <a class="skip-link" href="#MainContent">Skip to content</a>
-    {% section 'announcement-bar' %}
-    {% section 'header' %}
+    {% sections 'header-group' %}
     <main id="MainContent" role="main" tabindex="-1">{{ content_for_layout }}</main>
-    {% section 'footer' %}
+    {% sections 'footer-group' %}
   </body>
 </html>
