@@ -1,13 +1,35 @@
 {
   "sections": {
     "hero": { "type": "hero-shadow", "settings": {} },
-    "categories": { "type": "category-grid", "settings": {} },
-    "featured": { "type": "featured-products", "settings": {} },
+    "categories": {
+      "type": "category-grid",
+      "settings": {},
+      "blocks": {
+        "cat1":{"type":"category","settings":{"collection":"oversized-t-shirts","label":"OVERSIZED T-SHIRTS"}},
+        "cat2":{"type":"category","settings":{"collection":"shirts","label":"SHIRTS"}},
+        "cat3":{"type":"category","settings":{"collection":"shoes","label":"SHOES"}},
+        "cat4":{"type":"category","settings":{"collection":"corset","label":"CORSETS"}},
+        "cat5":{"type":"category","settings":{"collection":"jackets-hoodies","label":"JACKETS & HOODIES"}},
+        "cat6":{"type":"category","settings":{"collection":"accessories","label":"ACCESSORIES"}}
+      },
+      "block_order":["cat1","cat2","cat3","cat4","cat5","cat6"]
+    },
+    "featured": { "type": "featured-products", "settings": {"collection":"new-arrivals"} },
     "editorial": { "type": "editorial-brand", "settings": {} },
     "campaign": { "type": "campaign-video", "settings": {} },
     "women": { "type": "women-spotlight", "settings": {} },
     "drop": { "type": "new-drop", "settings": {} },
-    "trust": { "type": "trust-strip", "settings": {} }
+    "trust": {
+      "type": "trust-strip",
+      "settings": {},
+      "blocks":{
+        "t1":{"type":"item","settings":{"text":"SECURE CHECKOUT"}},
+        "t2":{"type":"item","settings":{"text":"EASY SHOPPING"}},
+        "t3":{"type":"item","settings":{"text":"FAST SHIPPING"}},
+        "t4":{"type":"item","settings":{"text":"CUSTOMER SUPPORT"}}
+      },
+      "block_order":["t1","t2","t3","t4"]
+    }
   },
   "order": ["hero","categories","featured","editorial","campaign","women","drop","trust"]
 }
