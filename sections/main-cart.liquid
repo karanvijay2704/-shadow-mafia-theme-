@@ -1,2 +1,29 @@
-<section class="section-shell"><div class="section-head"><p class="eyebrow">YOUR BAG</p><h1>CART</h1></div>{% if cart.item_count == 0 %}<p>Your cart is empty.</p>{% else %}<form action="{{ routes.cart_url }}" method="post">{% for item in cart.items %}<div class="cart-row"><a href="{{ item.url }}">{{ item.image | image_url: width: 240 | image_tag }}</a><div><h3>{{ item.product.title }}</h3><p>{{ item.final_line_price | money }}</p><input type="number" name="updates[]" value="{{ item.quantity }}" min="0"></div></div>{% endfor %}<button class="btn-secondary" name="update">UPDATE BAG</button><div class="cart-total">TOTAL {{ cart.total_price | money }}</div><button class="btn-primary" name="checkout">CHECKOUT →</button></form>{% endif %}</section>
+<section class="section-shell">
+  <div class="section-head"><p class="eyebrow">YOUR BAG</p><h1>CART</h1></div>
+  {% if cart.item_count == 0 %}
+    <p>Your cart is empty.</p>
+    <a class="btn-primary" href="/collections/new-arrivals">SHOP THE DROP →</a>
+  {% else %}
+    <form action="{{ routes.cart_url }}" method="post">
+      {% for item in cart.items %}
+        <div class="cart-row">
+          <a href="{{ item.url }}">
+            {% if item.image %}{{ item.image | image_url: width: 360 | image_tag: loading: 'lazy' }}{% endif %}
+          </a>
+          <div>
+            <h3><a href="{{ item.url }}">{{ item.product.title }}</a></h3>
+            {% unless item.product.has_only_default_variant %}<p>{{ item.variant.title }}</p>{% endunless %}
+            <p>{{ item.final_line_price | money }}</p>
+            <label for="CartQty-{{ forloop.index }}">Quantity</label>
+            <input id="CartQty-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0">
+            <p><a href="{{ item.url_to_remove }}">Remove</a></p>
+          </div>
+        </div>
+      {% endfor %}
+      <button class="btn-secondary" name="update" type="submit">UPDATE BAG</button>
+      <div class="cart-total">TOTAL {{ cart.total_price | money }}</div>
+      <button class="btn-primary" name="checkout" type="submit">SECURE CHECKOUT →</button>
+    </form>
+  {% endif %}
+</section>
 {% schema %}{"name":"Main cart","settings":[]}{% endschema %}
