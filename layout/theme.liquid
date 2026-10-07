@@ -1,0 +1,18 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#050505">
+    <title>{% if page_title %}{{ page_title }} — {% endif %}{{ shop.name }}</title>
+    {{ content_for_header }}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+  </head>
+  <body class="template-{{ template.name | handle }}">
+    {% section 'announcement-bar' %}
+    {% section 'header' %}
+    <main id="MainContent" role="main" tabindex="-1">{{ content_for_layout }}</main>
+    {% section 'footer' %}
+  </body>
+</html>
