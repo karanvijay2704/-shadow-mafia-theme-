@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "hero": { "type": "hero-shadow", "settings": {} },
+    "categories": { "type": "category-grid", "settings": {} },
+    "featured": { "type": "featured-products", "settings": {} },
+    "editorial": { "type": "editorial-brand", "settings": {} },
+    "women": { "type": "women-spotlight", "settings": {} },
+    "drop": { "type": "new-drop", "settings": {} },
+    "trust": { "type": "trust-strip", "settings": {} }
+  },
+  "order": ["hero","categories","featured","editorial","women","drop","trust"]
+}
