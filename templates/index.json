@@ -4,9 +4,10 @@
     "categories": { "type": "category-grid", "settings": {} },
     "featured": { "type": "featured-products", "settings": {} },
     "editorial": { "type": "editorial-brand", "settings": {} },
+    "campaign": { "type": "campaign-video", "settings": {} },
     "women": { "type": "women-spotlight", "settings": {} },
     "drop": { "type": "new-drop", "settings": {} },
     "trust": { "type": "trust-strip", "settings": {} }
   },
-  "order": ["hero","categories","featured","editorial","women","drop","trust"]
+  "order": ["hero","categories","featured","editorial","campaign","women","drop","trust"]
 }
