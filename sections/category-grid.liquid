@@ -1,0 +1,15 @@
+<section class="section-shell">
+  <div class="section-head"><p class="eyebrow">SHOP BY CATEGORY</p><h2>ENTER THE UNDERGROUND</h2></div>
+  <div class="category-grid">
+    {% assign cats = 'oversized-t-shirts|OVERSIZED T-SHIRTS,shirts|SHIRTS,shoes|SHOES,corset|CORSETS,jackets-hoodies|JACKETS & HOODIES,accessories|ACCESSORIES' | split: ',' %}
+    {% for item in cats %}
+      {% assign p = item | split: '|' %}
+      {% assign c = collections[p[0]] %}
+      <a class="category-card" href="{{ c.url | default: '/collections/all' }}">
+        {% if c.featured_image %}{{ c.featured_image | image_url: width: 900 | image_tag: loading: 'lazy' }}{% else %}<div class="category-fallback"></div>{% endif %}
+        <span>{{ p[1] }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% schema %}{"name":"Category grid","settings":[]}{% endschema %}
