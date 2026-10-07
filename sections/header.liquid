@@ -1,12 +1,13 @@
 <header class="site-header">
-  <button class="icon-btn mobile-only" data-menu-toggle aria-label="Open menu">☰</button>
-  <a class="brand" href="{{ routes.root_url }}">
+  <button class="icon-btn mobile-only" data-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="MobileMenu">☰</button>
+  <a class="brand" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
     {% if settings.logo != blank %}
-      {{ settings.logo | image_url: width: 220 | image_tag: class: 'brand-logo', loading: 'eager' }}
+      {{ settings.logo | image_url: width: 240 | image_tag: class: 'brand-logo', loading: 'eager' }}
     {% else %}
       <span class="brand-mark">SM</span><span class="brand-name">SHADOW MAFIA</span>
     {% endif %}
   </a>
+
   <nav class="desktop-nav" aria-label="Primary">
     <a href="/collections/new-arrivals">NEW DROP</a>
     <a href="/collections/oversized-t-shirts">OVERSIZED T-SHIRTS</a>
@@ -14,19 +15,23 @@
     <a href="/collections/shoes">SHOES</a>
     <a href="/collections/accessories">ACCESSORIES</a>
   </nav>
+
   <div class="header-actions">
-    <a href="{{ routes.search_url }}" aria-label="Search">⌕</a>
-    <a href="{{ routes.account_url }}" aria-label="Account">◌</a>
-    <a href="{{ routes.cart_url }}" aria-label="Cart">Bag <span id="CartCount">{{ cart.item_count }}</span></a>
+    <a href="{{ routes.search_url }}" aria-label="Search">SEARCH</a>
+    <a href="{{ routes.account_url }}" aria-label="Account">ACCOUNT</a>
+    <a href="{{ routes.cart_url }}" aria-label="Cart">BAG <span id="CartCount">{{ cart.item_count }}</span></a>
   </div>
-  <div class="mobile-menu" data-mobile-menu>
-    <button class="mobile-close" data-menu-toggle aria-label="Close menu">×</button>
+
+  <nav class="mobile-menu" id="MobileMenu" data-mobile-menu aria-label="Mobile" aria-hidden="true">
+    <button class="mobile-close" data-menu-toggle aria-label="Close menu" aria-expanded="false">×</button>
     <a href="/collections/new-arrivals">NEW DROP</a>
     <a href="/collections/oversized-t-shirts">OVERSIZED T-SHIRTS</a>
+    <a href="/collections/shirts">SHIRTS</a>
     <a href="/collections/jackets-hoodies">JACKETS & HOODIES</a>
     <a href="/collections/shoes">SHOES</a>
     <a href="/collections/corset">CORSETS</a>
     <a href="/collections/accessories">ACCESSORIES</a>
-  </div>
+    <a href="/collections/women">WOMEN</a>
+  </nav>
 </header>
 {% schema %}{"name":"Header","settings":[]}{% endschema %}
