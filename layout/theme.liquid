@@ -17,6 +17,7 @@
   <body class="template-{{ template.name | handle }}">
     <a class="skip-link" href="#MainContent">Skip to content</a>
     {% sections 'header-group' %}
+    {% section 'cart-drawer' %}
     <main id="MainContent" role="main" tabindex="-1">{{ content_for_layout }}</main>
     {% sections 'footer-group' %}
   </body>
