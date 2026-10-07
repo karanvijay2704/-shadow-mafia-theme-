@@ -1,22 +1,48 @@
 <section class="hero-shadow">
-  <div class="hero-media">
-    {% if section.settings.image != blank %}
-      {{ section.settings.image | image_url: width: 2200 | image_tag: class: 'hero-image', loading: 'eager' }}
+  <div class="hero-media" aria-hidden="true">
+    {% if section.settings.video != blank %}
+      {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, class: 'hero-video hero-video--desktop' }}
+    {% elsif section.settings.image != blank %}
+      {{ section.settings.image | image_url: width: 2400 | image_tag: class: 'hero-image hero-image--desktop', loading: 'eager', fetchpriority: 'high' }}
     {% else %}
       <div class="hero-placeholder"><span>SHADOW MAFIA</span></div>
     {% endif %}
-    <div class="hero-vignette"></div><div class="hero-sweep"></div>
+
+    {% if section.settings.mobile_video != blank %}
+      {{ section.settings.mobile_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, class: 'hero-video hero-video--mobile' }}
+    {% elsif section.settings.mobile_image != blank %}
+      {{ section.settings.mobile_image | image_url: width: 1200 | image_tag: class: 'hero-image hero-image--mobile', loading: 'eager' }}
+    {% endif %}
+
+    <div class="hero-vignette"></div>
+    <div class="hero-sweep"></div>
+    <div class="hero-grain"></div>
   </div>
+
   <div class="hero-copy">
-    <p class="eyebrow">SHADOW MAFIA • WALK DIFFERENT</p>
-    <h1>WEAR YOUR<br>DARK SIDE</h1>
-    <p>NOT JUST CLOTHES. IT’S A MENTALITY.</p>
-    <a class="btn-primary" href="{{ section.settings.link | default: '/collections/new-arrivals' }}">SHOP THE DROP →</a>
+    <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    <h1>{{ section.settings.heading }}</h1>
+    <p class="hero-subline">{{ section.settings.subheading }}</p>
+    {% if section.settings.button_label != blank %}
+      <a class="btn-primary" href="{{ section.settings.link | default: '/collections/new-arrivals' }}">{{ section.settings.button_label }} →</a>
+    {% endif %}
   </div>
 </section>
+
 {% schema %}
-{"name":"Shadow hero","settings":[
-{"type":"image_picker","id":"image","label":"Hero artwork"},
-{"type":"url","id":"link","label":"CTA link"}
-]}
+{
+  "name": "Shadow hero",
+  "settings": [
+    {"type":"video","id":"video","label":"Desktop hero video"},
+    {"type":"video","id":"mobile_video","label":"Mobile hero video"},
+    {"type":"image_picker","id":"image","label":"Desktop fallback image"},
+    {"type":"image_picker","id":"mobile_image","label":"Mobile fallback image"},
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"SHADOW MAFIA • WALK DIFFERENT"},
+    {"type":"textarea","id":"heading","label":"Heading","default":"WEAR YOUR\nDARK SIDE"},
+    {"type":"text","id":"subheading","label":"Subheading","default":"NOT JUST CLOTHES. IT’S A MENTALITY."},
+    {"type":"text","id":"button_label","label":"Button label","default":"SHOP THE DROP"},
+    {"type":"url","id":"link","label":"CTA link"}
+  ],
+  "presets":[{"name":"Shadow hero"}]
+}
 {% endschema %}
