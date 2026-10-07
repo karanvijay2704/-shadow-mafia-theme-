@@ -1,0 +1,31 @@
+<section class="section-shell">
+  <div class="section-head">
+    <p class="eyebrow">JOURNAL</p>
+    <h1>{{ blog.title }}</h1>
+  </div>
+
+  {% paginate blog.articles by 12 %}
+    <div class="journal-grid">
+      {% for article in blog.articles %}
+        <article class="journal-card">
+          <a href="{{ article.url }}">
+            <div class="journal-card__media">
+              {% if article.image %}
+                {{ article.image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '360,640,900,1100' }}
+              {% else %}
+                <div class="journal-card__placeholder"></div>
+              {% endif %}
+            </div>
+            <p class="eyebrow">{{ article.published_at | date: '%d.%m.%Y' }}</p>
+            <h2>{{ article.title }}</h2>
+            {% if article.excerpt != blank %}<p>{{ article.excerpt | strip_html | truncate: 130 }}</p>{% endif %}
+          </a>
+        </article>
+      {% else %}
+        <p>No journal entries yet.</p>
+      {% endfor %}
+    </div>
+    {% if paginate.pages > 1 %}<nav class="pagination" aria-label="Pagination">{{ paginate | default_pagination }}</nav>{% endif %}
+  {% endpaginate %}
+</section>
+{% schema %}{"name":"Main blog","settings":[]}{% endschema %}
