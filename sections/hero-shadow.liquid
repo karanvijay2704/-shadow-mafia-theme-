@@ -1,0 +1,22 @@
+<section class="hero-shadow">
+  <div class="hero-media">
+    {% if section.settings.image != blank %}
+      {{ section.settings.image | image_url: width: 2200 | image_tag: class: 'hero-image', loading: 'eager' }}
+    {% else %}
+      <div class="hero-placeholder"><span>SHADOW MAFIA</span></div>
+    {% endif %}
+    <div class="hero-vignette"></div><div class="hero-sweep"></div>
+  </div>
+  <div class="hero-copy">
+    <p class="eyebrow">SHADOW MAFIA • WALK DIFFERENT</p>
+    <h1>WEAR YOUR<br>DARK SIDE</h1>
+    <p>NOT JUST CLOTHES. IT’S A MENTALITY.</p>
+    <a class="btn-primary" href="{{ section.settings.link | default: '/collections/new-arrivals' }}">SHOP THE DROP →</a>
+  </div>
+</section>
+{% schema %}
+{"name":"Shadow hero","settings":[
+{"type":"image_picker","id":"image","label":"Hero artwork"},
+{"type":"url","id":"link","label":"CTA link"}
+]}
+{% endschema %}
