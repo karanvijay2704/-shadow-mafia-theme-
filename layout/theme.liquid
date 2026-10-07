@@ -11,6 +11,14 @@
     {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
     <title>{% if page_title %}{{ page_title }} — {% endif %}{{ shop.name }}</title>
     {{ content_for_header }}
+    <style>
+      {{ settings.heading_font | font_face: font_display: 'swap' }}
+      {{ settings.body_font | font_face: font_display: 'swap' }}
+      :root {
+        --font-heading: {{ settings.heading_font.family }}, {{ settings.heading_font.fallback_families }};
+        --font-body: {{ settings.body_font.family }}, {{ settings.body_font.fallback_families }};
+      }
+    </style>
     {{ 'base.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
   </head>
