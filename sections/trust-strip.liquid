@@ -1,2 +1,18 @@
-<section class="trust-strip"><span>SECURE CHECKOUT</span><span>EASY SHOPPING</span><span>FAST SHIPPING</span><span>CUSTOMER SUPPORT</span></section>
-{% schema %}{"name":"Trust strip","settings":[]}{% endschema %}
+<section class="trust-strip">
+  {% for block in section.blocks %}
+    <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+  {% endfor %}
+</section>
+{% schema %}
+{
+  "name":"Trust strip",
+  "max_blocks":4,
+  "settings":[],
+  "blocks":[
+    {"type":"item","name":"Trust item","settings":[{"type":"text","id":"text","label":"Text","default":"SECURE CHECKOUT"}]}
+  ],
+  "presets":[
+    {"name":"Trust strip","blocks":[{"type":"item"},{"type":"item"},{"type":"item"},{"type":"item"}]}
+  ]
+}
+{% endschema %}
