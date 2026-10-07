@@ -1,0 +1,21 @@
+<section class="section-shell product-page">
+  <div class="product-gallery">
+    {% for media in product.media %}{{ media | image_url: width: 1200 | image_tag: loading: 'lazy' }}{% endfor %}
+  </div>
+  <div class="product-info">
+    <p class="eyebrow">SHADOW MAFIA</p><h1>{{ product.title }}</h1><div class="price">{{ product.selected_or_first_available_variant.price | money }}</div>
+    {% form 'product', product %}
+      {% unless product.has_only_default_variant %}
+        {% for option in product.options_with_values %}
+          <label>{{ option.name }}
+            <select name="options[{{ option.name | escape }}]">{% for value in option.values %}<option>{{ value }}</option>{% endfor %}</select>
+          </label>
+        {% endfor %}
+      {% endunless %}
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <button class="btn-primary full" type="submit" {% unless product.available %}disabled{% endunless %}>{% if product.available %}ADD TO BAG{% else %}SOLD OUT{% endif %}</button>
+    {% endform %}
+    <div class="rte">{{ product.description }}</div>
+  </div>
+</section>
+{% schema %}{"name":"Main product","settings":[]}{% endschema %}
