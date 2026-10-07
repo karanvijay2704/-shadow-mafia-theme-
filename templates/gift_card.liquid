@@ -1,0 +1,42 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ shop.name }} Gift Card</title>
+    {{ content_for_header }}
+    <style>
+      body{margin:0;background:#050505;color:#f5f5f5;font-family:Arial,Helvetica,sans-serif}
+      .gc{min-height:100vh;display:grid;place-items:center;padding:24px}
+      .gc-card{width:min(560px,100%);background:linear-gradient(145deg,#111116,#070708);border:1px solid #2d2d33;padding:34px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+      .gc-brand{font-weight:900;letter-spacing:.16em;font-size:13px}.gc-card h1{font-size:56px;line-height:.9;margin:22px 0 10px}.gc-value{font-size:30px;font-weight:800;margin:24px 0}.gc-code{padding:16px;border:1px dashed #555;background:#0a0a0c;text-align:center;font-size:20px;letter-spacing:.12em;word-break:break-word}.gc-meta{color:#999;line-height:1.6}.gc-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}.gc-actions a,.gc-actions button{min-height:46px;padding:0 18px;border:1px solid #b31320;background:#b31320;color:#fff;font-weight:900;letter-spacing:.08em;cursor:pointer;text-decoration:none}.gc-actions .secondary{background:transparent;border-color:#555}.gc-status{color:#ef3442;font-weight:900;letter-spacing:.08em}
+    </style>
+  </head>
+  <body>
+    <main class="gc">
+      <section class="gc-card">
+        <div class="gc-brand">SHADOW MAFIA • GIFT CARD</div>
+        <h1>WALK DIFFERENT</h1>
+
+        {% if gift_card.enabled == false or gift_card.expired %}
+          <p class="gc-status">{% if gift_card.expired %}EXPIRED{% else %}DISABLED{% endif %}</p>
+        {% endif %}
+
+        <div class="gc-value">{{ gift_card.balance | money_with_currency }}</div>
+        <p class="gc-meta">Use this code at checkout.</p>
+        <div class="gc-code">{{ gift_card.code }}</div>
+
+        {% if gift_card.expires_on %}
+          <p class="gc-meta">Expires {{ gift_card.expires_on | date: '%B %d, %Y' }}</p>
+        {% endif %}
+
+        <div class="gc-actions">
+          <a href="{{ shop.url }}">SHOP NOW →</a>
+          <button class="secondary" type="button" onclick="window.print()">PRINT</button>
+          {% if gift_card.pass_url %}<a class="secondary" href="{{ gift_card.pass_url }}">APPLE WALLET</a>{% endif %}
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
