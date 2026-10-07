@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="#050505">
+    {% if settings.favicon != blank %}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 64, height: 64 }}">
+    {% endif %}
     <link rel="canonical" href="{{ canonical_url }}">
     {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
     <title>{% if page_title %}{{ page_title }} — {% endif %}{{ shop.name }}</title>
