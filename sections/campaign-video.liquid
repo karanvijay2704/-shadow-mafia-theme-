@@ -1,0 +1,39 @@
+<section class="campaign-video">
+  <div class="campaign-media" aria-hidden="true">
+    {% if section.settings.video != blank %}
+      {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, class: 'campaign-video-el campaign-video-el--desktop' }}
+    {% elsif section.settings.image != blank %}
+      {{ section.settings.image | image_url: width: 2200 | image_tag: class: 'campaign-image campaign-image--desktop', loading: 'lazy' }}
+    {% endif %}
+    {% if section.settings.mobile_video != blank %}
+      {{ section.settings.mobile_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, class: 'campaign-video-el campaign-video-el--mobile' }}
+    {% elsif section.settings.mobile_image != blank %}
+      {{ section.settings.mobile_image | image_url: width: 1200 | image_tag: class: 'campaign-image campaign-image--mobile', loading: 'lazy' }}
+    {% endif %}
+    <div class="campaign-overlay"></div>
+  </div>
+  <div class="campaign-copy">
+    <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    <h2>{{ section.settings.heading }}</h2>
+    {% if section.settings.text != blank %}<p>{{ section.settings.text }}</p>{% endif %}
+    {% if section.settings.button_label != blank %}<a class="btn-secondary" href="{{ section.settings.link }}">{{ section.settings.button_label }} →</a>{% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name":"Campaign video banner",
+  "settings":[
+    {"type":"video","id":"video","label":"Desktop short video"},
+    {"type":"video","id":"mobile_video","label":"Mobile short video"},
+    {"type":"image_picker","id":"image","label":"Desktop fallback image"},
+    {"type":"image_picker","id":"mobile_image","label":"Mobile fallback image"},
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"LIMITED SIGNAL"},
+    {"type":"text","id":"heading","label":"Heading","default":"MOVE IN THE SHADOWS"},
+    {"type":"textarea","id":"text","label":"Text","default":"Short campaign loops built for new drops, launches and limited releases."},
+    {"type":"text","id":"button_label","label":"Button label","default":"ENTER THE DROP"},
+    {"type":"url","id":"link","label":"Link"}
+  ],
+  "presets":[{"name":"Campaign video banner"}]
+}
+{% endschema %}
