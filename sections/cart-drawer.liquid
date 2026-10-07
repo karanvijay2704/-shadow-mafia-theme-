@@ -1,0 +1,48 @@
+<dialog class="cart-drawer" data-cart-drawer aria-label="Shopping bag">
+  <div class="cart-drawer__panel">
+    <div class="cart-drawer__head">
+      <div>
+        <p class="eyebrow">YOUR BAG</p>
+        <h2>BAG <span data-cart-drawer-count>{{ cart.item_count }}</span></h2>
+      </div>
+      <button class="cart-drawer__close" type="button" data-cart-drawer-close aria-label="Close cart">×</button>
+    </div>
+
+    <div class="cart-drawer__body" data-cart-drawer-body>
+      {% if cart.item_count == 0 %}
+        <div class="cart-drawer__empty">
+          <p>Your bag is empty.</p>
+          <a class="btn-secondary" href="/collections/new-arrivals">SHOP THE DROP →</a>
+        </div>
+      {% else %}
+        {% for item in cart.items %}
+          <div class="cart-drawer__item" data-cart-line="{{ forloop.index }}">
+            <a href="{{ item.url }}" class="cart-drawer__image">
+              {% if item.image %}{{ item.image | image_url: width: 260 | image_tag: loading: 'lazy' }}{% endif %}
+            </a>
+            <div>
+              <a href="{{ item.url }}"><strong>{{ item.product.title }}</strong></a>
+              {% unless item.product.has_only_default_variant %}<small>{{ item.variant.title }}</small>{% endunless %}
+              <span>{{ item.final_line_price | money }}</span>
+              <div class="cart-drawer__qty">
+                <button type="button" data-cart-change data-line="{{ forloop.index }}" data-quantity="{{ item.quantity | minus: 1 }}">−</button>
+                <span>{{ item.quantity }}</span>
+                <button type="button" data-cart-change data-line="{{ forloop.index }}" data-quantity="{{ item.quantity | plus: 1 }}">+</button>
+              </div>
+              <button class="cart-drawer__remove" type="button" data-cart-change data-line="{{ forloop.index }}" data-quantity="0">REMOVE</button>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <div class="cart-drawer__foot" data-cart-drawer-foot {% if cart.item_count == 0 %}hidden{% endif %}>
+      <div class="cart-drawer__total"><span>TOTAL</span><strong data-cart-total>{{ cart.total_price | money }}</strong></div>
+      <a class="btn-secondary full" href="{{ routes.cart_url }}">VIEW BAG</a>
+      <form action="{{ routes.cart_url }}" method="post">
+        <button class="btn-primary full" type="submit" name="checkout">SECURE CHECKOUT →</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+{% schema %}{"name":"Cart drawer","settings":[]}{% endschema %}
