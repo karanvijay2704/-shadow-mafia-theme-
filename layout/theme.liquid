@@ -4,12 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="#050505">
+    <link rel="canonical" href="{{ canonical_url }}">
+    {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
     <title>{% if page_title %}{{ page_title }} — {% endif %}{{ shop.name }}</title>
     {{ content_for_header }}
     {{ 'base.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
   </head>
   <body class="template-{{ template.name | handle }}">
+    <a class="skip-link" href="#MainContent">Skip to content</a>
     {% section 'announcement-bar' %}
     {% section 'header' %}
     <main id="MainContent" role="main" tabindex="-1">{{ content_for_layout }}</main>
