@@ -1,4 +1,29 @@
 <section class="drop-banner">
-  <div class="section-shell"><p class="eyebrow">LATEST ARRIVAL</p><h2>THE NEW DROP IS LIVE</h2><a class="btn-primary" href="/collections/new-arrivals">DISCOVER NOW →</a></div>
+  <div class="drop-media" aria-hidden="true">
+    {% if section.settings.video != blank %}
+      {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, class: 'drop-video' }}
+    {% elsif section.settings.image != blank %}
+      {{ section.settings.image | image_url: width: 2200 | image_tag: class: 'drop-image', loading: 'lazy' }}
+    {% endif %}
+    <div class="drop-overlay"></div>
+  </div>
+  <div class="section-shell drop-content">
+    <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    <h2>{{ section.settings.heading }}</h2>
+    <a class="btn-primary" href="{{ section.settings.link | default: '/collections/new-arrivals' }}">{{ section.settings.button_label }} →</a>
+  </div>
 </section>
-{% schema %}{"name":"New drop","settings":[]}{% endschema %}
+{% schema %}
+{
+  "name":"New drop",
+  "settings":[
+    {"type":"video","id":"video","label":"Short loop video"},
+    {"type":"image_picker","id":"image","label":"Fallback image"},
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"LATEST ARRIVAL"},
+    {"type":"text","id":"heading","label":"Heading","default":"THE NEW DROP IS LIVE"},
+    {"type":"text","id":"button_label","label":"Button label","default":"DISCOVER NOW"},
+    {"type":"url","id":"link","label":"Link"}
+  ],
+  "presets":[{"name":"New drop"}]
+}
+{% endschema %}
