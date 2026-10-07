@@ -1,0 +1,14 @@
+<section class="section-shell">
+  <div class="section-head"><p class="eyebrow">SHOP</p><h1>COLLECTIONS</h1></div>
+  <div class="category-grid">
+    {% for collection in collections %}
+      {% unless collection.handle == 'frontpage' %}
+        <a class="category-card" href="{{ collection.url }}">
+          {% if collection.featured_image %}{{ collection.featured_image | image_url: width: 900 | image_tag: loading: 'lazy' }}{% else %}<div class="category-fallback"></div>{% endif %}
+          <span>{{ collection.title }}</span>
+        </a>
+      {% endunless %}
+    {% endfor %}
+  </div>
+</section>
+{% schema %}{"name":"Collection list","settings":[]}{% endschema %}
